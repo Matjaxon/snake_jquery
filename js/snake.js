@@ -6,6 +6,15 @@ function Snake (dir, segments) {
   this.maxLength = 1;
 }
 
+Snake.prototype.printEyes = function() {
+  const eyes = {"N": "..",
+                "S": "..",
+                "W": "~:",
+                "E": ":~"};
+  return eyes[this.dir];
+};
+
+
 Snake.prototype.move = function() {
   let headPos = this.segments[0];
   let newPos = Util.plus(headPos, this.dir);

@@ -59,14 +59,13 @@
 	const Snake = __webpack_require__(2);
 	const Util = __webpack_require__(3);
 	const Board = __webpack_require__(4);
-	const Key = __webpack_require__(6);
+	const Key = __webpack_require__(5);
 	
 	function SnakeView($el) {
 	  this.board = new Board();
 	  this.$el = $el;
 	  this.setupInterface();
 	  this.setupBoard();
-	  // this.bindEvents();
 	  this.interval = setInterval(() => {
 	    this.step();
 	  }, 100);
@@ -99,7 +98,14 @@
 	
 	    if (Util.arrayIncludes(snakePos, sqPos)) {
 	      $sq.addClass('snake');
+	      debugger;
+	      if (Util.equals(this.board.snake.head(), sqPos)) {
+	        $sq.text(this.board.snake.printEyes());
+	      } else {
+	        $sq.text("");
+	      }
 	    } else {
+	      $sq.text("");
 	      $sq.removeClass('snake');
 	    }
 	  });
@@ -122,7 +128,7 @@
 	
 	SnakeView.prototype.setupInterface = function () {
 	  const $scoreboard = $('<section>').addClass('scoreboard');
-	  $scoreboard.text(`SCORE: ${this.board.snake.maxLength - 1}`);
+	  $scoreboard.text(`SCORE:   ${this.board.snake.maxLength - 1}`);
 	  this.$el.append($scoreboard);
 	};
 	
@@ -186,6 +192,15 @@
 	  this.segments = segments;
 	  this.maxLength = 1;
 	}
+	
+	Snake.prototype.printEyes = function() {
+	  const eyes = {"N": "..",
+	                "S": "..",
+	                "W": "~:",
+	                "E": ":~"};
+	  return eyes[this.dir];
+	};
+	
 	
 	Snake.prototype.move = function() {
 	  let headPos = this.segments[0];
@@ -301,8 +316,7 @@
 
 
 /***/ },
-/* 5 */,
-/* 6 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//     keymaster.js

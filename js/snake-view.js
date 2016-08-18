@@ -8,7 +8,6 @@ function SnakeView($el) {
   this.$el = $el;
   this.setupInterface();
   this.setupBoard();
-  // this.bindEvents();
   this.interval = setInterval(() => {
     this.step();
   }, 100);
@@ -41,7 +40,14 @@ SnakeView.prototype.renderSnake = function() {
 
     if (Util.arrayIncludes(snakePos, sqPos)) {
       $sq.addClass('snake');
+      debugger;
+      if (Util.equals(this.board.snake.head(), sqPos)) {
+        $sq.text(this.board.snake.printEyes());
+      } else {
+        $sq.text("");
+      }
     } else {
+      $sq.text("");
       $sq.removeClass('snake');
     }
   });
@@ -64,7 +70,7 @@ SnakeView.prototype.renderApple = function () {
 
 SnakeView.prototype.setupInterface = function () {
   const $scoreboard = $('<section>').addClass('scoreboard');
-  $scoreboard.text(`SCORE: ${this.board.snake.maxLength - 1}`);
+  $scoreboard.text(`SCORE:   ${this.board.snake.maxLength - 1}`);
   this.$el.append($scoreboard);
 };
 
