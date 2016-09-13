@@ -1,4 +1,4 @@
-# Reddit Clone
+# jQuery Snake
 
 ## Overview
 The purpose of this project was to learn to use jQuery to manipulate the DOM and to demonstrate object oriented programming using JavaScript.  
